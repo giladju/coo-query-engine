@@ -1,0 +1,67 @@
+group="coo"
+version="0.1.0"
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://jcenter.bintray.com' }
+    }
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.1.1.RELEASE'
+        classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin',     version: '0.3'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+bintray {
+    user = 'crabitcoo'
+    key = 'c4148b6cb01eb14bda3d54635d6897d158b019c7'
+
+    publications = ['mavenJava']
+
+    pkg {
+        repo = 'maven'
+        name = 'coo-svc-security'
+        licenses = ['MIT']
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+test {
+    scanForTestClasses = false
+}

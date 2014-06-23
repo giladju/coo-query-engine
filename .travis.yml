@@ -1,0 +1,4 @@
+language: java
+script: ./gradlew clean build
+jdk: oraclejdk8
+after_success: ./gradlew bintrayUpload
