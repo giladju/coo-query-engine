@@ -37,7 +37,7 @@ bintray {
 
     pkg {
         repo = 'maven'
-        name = 'coo-svc-security'
+        name = 'coo-query-engine'
         licenses = ['MIT']
     }
 }
