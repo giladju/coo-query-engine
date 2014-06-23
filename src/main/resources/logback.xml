@@ -1,0 +1,30 @@
+<configuration debug="false">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="COO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/coo.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/coo_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>72</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="coo" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="COO"/>
+    </root>
+</configuration>
